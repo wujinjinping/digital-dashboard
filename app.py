@@ -74,7 +74,7 @@ def query_duck(code=None, name=None, year=None, ind_code=None, ind_name=None):
         sql += ' AND "企业名称" LIKE $name'
         args['name'] = f'%{name}%'
     if ind_code:
-        sql += ' AND "行业代码" = $ind_code'
+        sql += ' AND UPPER("行业代码") = UPPER($ind_code)'
         args['ind_code'] = ind_code
     if ind_name:
         sql += ' AND "行业名称" LIKE $ind_name'
@@ -92,6 +92,16 @@ HOME_HTML = '''
 <style>body{background:#f8f9fa}.card{margin:20px 0}.index-big{font-size:2.2rem;font-weight:700}</style>
 <div class="container">
   <h2 class="text-center mt-4">上市公司数字化转型指数查询仪表盘</h2>
+
+<div class="alert alert-info alert-dismissible fade show mt-3" role="alert">
+  <strong>使用提示：</strong>
+  ① 输入股票代码或企业名称关键字即可查询；
+  ② 选择行业代码/名称可查看行业整体趋势；
+  ③ 支持双企业对比；
+  ④ 可生成指定年份的行业折线图对比。
+  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div>
+
 
   <!-- ① 企业查询 -->
   <div class="card shadow">
