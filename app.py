@@ -9,9 +9,10 @@ import duckdb
 import os, matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+from matplotlib import font_manager
 font_path = os.path.join(os.path.dirname(__file__), 'SimSun.ttf')
-matplotlib.font_manager.fontManager.addfont(font_path)
-plt.rcParams['font.family'] = 'SimSun'
+font_manager.fontManager.addfont(font_path)
+plt.rcParams['font.family'] = font_manager.FontProperties(fname=font_path).get_name()
 plt.rcParams['axes.unicode_minus'] = False
 # ========================
 app = Flask(__name__)
